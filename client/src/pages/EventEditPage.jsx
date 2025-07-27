@@ -4,6 +4,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Spinner from '../components/Spinner';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const EventEditPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const EventEditPage = () => {
     const fetchEvent = async () => {
       try {
         // Updated URL to use the proxy
-        const { data } = await axios.get(`/api/events/${id}`);
+        const { data } = await axios.get(`${API_BASE_URL}/api/events/${id}`);
         setTitle(data.title);
         const formattedDate = new Date(data.date).toISOString().slice(0, 16);
         setDate(formattedDate);
@@ -52,7 +54,7 @@ const EventEditPage = () => {
       };
       // Updated URL to use the proxy
       await axios.put(
-        `/api/events/${id}`,
+        `${API_BASE_URL}/api/events/${id}`,
         { title, date, location, distance, pace, routeUrl },
         config
       );

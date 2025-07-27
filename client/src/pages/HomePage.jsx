@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const HomePage = () => {
   return (
     // Add a custom box-shadow to the main container

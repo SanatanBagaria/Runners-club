@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,7 +16,7 @@ const RegisterPage = () => {
     try {
       const config = { headers: { 'Content-Type': 'application/json' } };
       // Updated URL to use the proxy
-      await axios.post('/api/users/register', { name, email, password }, config);
+      await axios.post(`${API_BASE_URL}/api/users/register`, { name, email, password }, config);
       
       toast.success('Registration successful! An admin will approve your account shortly.');
       navigate('/login');

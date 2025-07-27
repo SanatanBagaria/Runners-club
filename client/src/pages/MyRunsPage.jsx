@@ -3,6 +3,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import Spinner from '../components/Spinner';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const MyRunsPage = () => {
   const [runs, setRuns] = useState([]);
   const [distance, setDistance] = useState('');
@@ -21,7 +23,7 @@ const MyRunsPage = () => {
   const fetchRuns = async () => {
     try {
       // Updated URL to use the proxy
-      const { data } = await axios.get('/api/runs/myruns', config);
+      const { data } = await axios.get(`${API_BASE_URL}/api/runs/myruns`, config);
       setRuns(data);
     } catch (err) {
       console.error('Failed to fetch runs', err);

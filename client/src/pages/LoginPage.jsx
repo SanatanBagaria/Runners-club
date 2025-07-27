@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ const LoginPage = () => {
     try {
       const config = { headers: { 'Content-Type': 'application/json' } };
       // Updated URL to use the proxy
-      const { data } = await axios.post('/api/users/login', { email, password }, config);
+      const { data } = await axios.post(`${API_BASE_URL}/api/users/login`, { email, password }, config);
       
       localStorage.setItem('userInfo', JSON.stringify(data));
       toast.success(`Welcome back, ${data.name.split(' ')[0]}!`);

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const EventCreatePage = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -33,7 +35,7 @@ const EventCreatePage = () => {
 
       // Updated URL to use the proxy
       await axios.post(
-        '/api/events',
+        `${API_BASE_URL}/api/events`,
         { title, date, location, distance, pace, routeUrl },
         config
       );

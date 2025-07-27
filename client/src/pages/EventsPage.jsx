@@ -4,6 +4,8 @@ import EventCard from '../components/EventCard';
 import Spinner from '../components/Spinner';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ const EventsPage = () => {
     const fetchEvents = async () => {
       try {
         // Updated URL to use the proxy
-        const { data } = await axios.get('/api/events');
+        const { data } = await axios.get(`${API_BASE_URL}/api/events`);
         setEvents(data);
       } catch (error) {
         console.error('Error fetching events:', error);

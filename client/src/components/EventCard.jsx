@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const EventCard = ({ event }) => {
   const [currentEvent, setCurrentEvent] = useState(event);
   const storedUserInfo = localStorage.getItem('userInfo');
@@ -28,7 +30,7 @@ const EventCard = ({ event }) => {
 
       // Updated URL to use the proxy
       const { data } = await axios.post(
-        `/api/events/${currentEvent._id}/rsvp`,
+        `${API_BASE_URL}/api/events/${currentEvent._id}/rsvp`,
         {},
         config
       );

@@ -3,6 +3,8 @@ import axios from 'axios';
 import Spinner from '../components/Spinner';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const MembersPage = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ const MembersPage = () => {
           },
         };
         // Updated URL to use the proxy
-        const { data } = await axios.get('/api/users', config);
+        const { data } = await axios.get(`${API_BASE_URL}/api/users`, config);
         setMembers(data);
       } catch (error) {
         console.error('Failed to fetch members', error);

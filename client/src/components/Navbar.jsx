@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const Navbar = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [pendingCount, setPendingCount] = useState(0);
@@ -26,7 +28,7 @@ const Navbar = () => {
         try {
           const config = { headers: { Authorization: `Bearer ${storedUser.token}` } };
           // Updated URL to use the proxy
-          const { data } = await axios.get('/api/users/pending', config);
+          const { data } = await axios.get(`${API_BASE_URL}/api/users/pending`, config);
           setPendingCount(data.length);
         } catch (error) {
           console.error('Could not fetch pending count', error);

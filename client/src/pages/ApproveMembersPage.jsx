@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const ApproveMembersPage = () => {
   const [pendingUsers, setPendingUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,7 @@ const ApproveMembersPage = () => {
   const fetchPendingUsers = async () => {
     try {
       // Updated URL to use the proxy
-      const { data } = await axios.get('/api/users/pending', config);
+      const { data } = await axios.get('${API_BASE_URL}/api/users/pending', config);
       setPendingUsers(data);
     } catch (err) {
       toast.error('Could not load pending users.');
@@ -36,7 +38,7 @@ const ApproveMembersPage = () => {
   const approveHandler = async (userId) => {
     try {
       // Updated URL to use the proxy
-      await axios.put(`/api/users/${userId}/approve`, {}, config);
+      await axios.put(`${API_BASE_URL}/api/users/${userId}/approve`, {}, config);
       toast.success('User approved!');
       // Refresh the list by filtering out the approved user
       setPendingUsers(pendingUsers.filter((user) => user._id !== userId));
