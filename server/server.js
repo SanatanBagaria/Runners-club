@@ -17,9 +17,21 @@ const app = express();
 connectDB();
 
 // Middleware
+const allowedOrigins = [
+  'https://runners-club-2o8fv04iw-sanatan-bagarias-projects.vercel.app',
+  'https://runners-club-n6e4ajxig-sanatan-bagarias-projects.vercel.app',
+  'http://localhost:5173', // Optional: keep for local dev
+];
+
 app.use(cors({
-  origin: 'https://runners-club-2o8fv04iw-sanatan-bagarias-projects.vercel.app',
-  credentials: true, // optional, remove if not using cookies/auth
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // If you use cookies/auth headers
 }));
 app.use(express.json()); // To parse JSON request bodies
 
