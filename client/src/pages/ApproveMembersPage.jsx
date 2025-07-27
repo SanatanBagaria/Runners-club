@@ -20,7 +20,7 @@ const ApproveMembersPage = () => {
   const fetchPendingUsers = async () => {
     try {
       // Updated URL to use the proxy
-      const { data } = await axios.get('${API_BASE_URL}/api/users/pending', config);
+      const { data } = await axios.get(`${API_BASE_URL}/api/users/pending`, config);
       setPendingUsers(data);
     } catch (err) {
       toast.error('Could not load pending users.');
