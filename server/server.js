@@ -20,7 +20,8 @@ connectDB();
 const allowedOrigins = [
   'https://runners-club-2o8fv04iw-sanatan-bagarias-projects.vercel.app',
   'https://runners-club-n6e4ajxig-sanatan-bagarias-projects.vercel.app',
-  'http://localhost:5173', // Optional: keep for local dev
+  'http://localhost:5173',
+  'https://runners-club.vercel.app/', // Optional: keep for local dev
 ];
 
 app.use(cors({
