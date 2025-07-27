@@ -17,7 +17,10 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(cors({
+  origin: 'https://runners-club-2o8fv04iw-sanatan-bagarias-projects.vercel.app',
+  credentials: true, // optional, remove if not using cookies/auth
+}));
 app.use(express.json()); // To parse JSON request bodies
 
 // A simple test route
